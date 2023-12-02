@@ -40,3 +40,12 @@ with open('day2/input.txt', 'r') as file:
     print(f"valid games = {valid_games}")
     score = sum(valid_games)
     print(f"score = {score}")
+
+    score2 = 0
+    for game in games:
+        max_red = max([c.get("red", 0) for c in game.cube_sets])
+        max_green = max([c.get("green", 0) for c in game.cube_sets])
+        max_blue = max([c.get("blue", 0) for c in game.cube_sets])
+        score2 += max_red * max_green * max_blue
+
+    print(f"score2 = {score2}")
