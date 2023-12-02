@@ -1,21 +1,15 @@
 import re
 
 
-def find_first_digit(line):
+def find_first_digit(line) -> int:
     match = re.search(r'(\d)', line)
-    return match.group(0) if match else None
+    return int(match.group(0)) if match else None
 
 
-# Open and read the file
 with open('day1/input.txt', 'r') as file:
     content = file.read()
 
-# File is automatically closed after the with block
-sum = 0
-for line in content.splitlines():
-    first_digit = find_first_digit(line)
-    last_digit = find_first_digit(line[::-1])
-    num = int(first_digit) * 10 + int(last_digit)
-    sum += num
+total = sum([find_first_digit(line) * 10 + find_first_digit(line[::-1])
+             for line in content.splitlines()])
 
-print(sum)
+print(total)
