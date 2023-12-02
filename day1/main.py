@@ -7,7 +7,7 @@ def find_first_digit(line):
 
 
 # Open and read the file
-with open('input.txt', 'r') as file:
+with open('day1/input.txt', 'r') as file:
     content = file.read()
 
 # File is automatically closed after the with block
