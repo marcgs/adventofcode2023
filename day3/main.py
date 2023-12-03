@@ -58,7 +58,7 @@ def check_gear(lines, line_idx, idx):
 
 
 with open('day3/input.txt', 'r') as file:
-    lines = file.read().splitlines()
+    lines = [line.strip() for line in file]
 
 engine_parts = [
     [int(match.group()) for match in re.finditer(r'\d+', line)
@@ -66,15 +66,15 @@ engine_parts = [
     for i, line in enumerate(lines)
 ]
 
-total = sum(int(part) for line_parts in engine_parts for part in line_parts)
+total = sum(part for line_parts in engine_parts for part in line_parts)
 print(f"Part 1 total: {total}")
 
-gear_digits = []
-for i, line in enumerate(lines):
-    for match in re.finditer(r'\*', line):
-        is_gear, digit1, digit2 = check_gear(lines, i, match.start())
-        if is_gear:
-            gear_digits.append((digit1, digit2))
+gear_digits = [
+ (digit1, digit2) for i, line in enumerate(lines)
+ for match in re.finditer(r'\*', line)
+ for is_gear, digit1, digit2 in [check_gear(lines, i, match.start())]
+ if is_gear
+]
 
 total = sum(digit1 * digit2 for digit1, digit2 in gear_digits)
 print(f"Part 2 total: {total}")
