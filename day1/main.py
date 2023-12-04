@@ -19,9 +19,13 @@ def convert(part):
 
 
 def calculate(line) -> int:
-    matches = re.findall(r'(\d|one|two|three|four|five|six|seven|eight|nine)', line)
+
+    nums = 'one|two|three|four|five|six|seven|eight|nine'
+    matches = re.findall(f'(\\d|{nums})', line)
     first = convert(matches[0])
-    last = convert(matches[-1])
+
+    matches = re.findall(f'(\\d|{nums[::-1]})', line[::-1])
+    last = convert(matches[0][::-1])
     return first * 10 + last
 
 
